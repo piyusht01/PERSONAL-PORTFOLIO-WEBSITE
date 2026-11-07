@@ -1,0 +1,247 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Personal Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky identity column on the left, scrolling sections on the right; stacks to one column on phones. */
+:root {
+  --bg: #eef1f5;
+  --surface: #f9fafc;
+  --ink: #131820;
+  --muted: #566070;
+  --rule: #d3d9e2;
+  --accent: #2646e6;
+  --accent-ink: #ffffff;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f131a; --surface: #161b24; --ink: #e8ecf2; --muted: #98a2b3;
+    --rule: #28303d; --accent: #7f95ff; --accent-ink: #0b0f18; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f131a; --surface: #161b24; --ink: #e8ecf2; --muted: #98a2b3;
+  --rule: #28303d; --accent: #7f95ff; --accent-ink: #0b0f18; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  padding-block: 48px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+
+.wrap {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: 64px;
+}
+.side { position: sticky; top: 48px; align-self: start; display: flex; flex-direction: column; gap: 28px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.name { font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 700; letter-spacing: -0.02em; }
+.role { color: var(--muted); margin: 12px 0 0; max-width: 28ch; }
+.nav { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 13px; }
+.nav a { color: var(--muted); text-decoration: none; padding-block: 2px; }
+.nav a:hover { color: var(--accent); }
+.contact { display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.contact .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.contact .github-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+.contact .label { font-family: var(--font-mono); font-size: 12px; color: var(--muted); min-width: 64px; }
+.copy {
+  font: 500 12px var(--font-mono); background: var(--accent); color: var(--accent-ink);
+  border: 0; padding: 4px 10px; cursor: pointer; border-radius: 2px;
+}
+
+main { display: flex; flex-direction: column; gap: 64px; min-width: 0; }
+section { display: flex; flex-direction: column; gap: 20px; min-width: 0; scroll-margin-top: 32px; }
+section > h2 {
+  font-size: 13px; font-family: var(--font-mono); font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+  border-bottom: 1px solid var(--rule); padding-bottom: 10px;
+}
+.lede { font-size: clamp(1.25rem, 2.4vw, 1.6rem); font-family: var(--font-display); line-height: 1.35; font-weight: 500; max-width: 34ch; text-wrap: pretty; margin: 0; }
+p { margin: 0; max-width: 65ch; }
+
+.projects { display: flex; flex-direction: column; }
+.project { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 20px; padding-block: 20px; border-bottom: 1px solid var(--rule); }
+.project:first-child { padding-top: 0; }
+.project .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 4px; }
+.project h3 { font-size: 1.3rem; font-weight: 700; margin-bottom: 6px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; list-style: none; padding: 0; }
+.tags li { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--rule); background: var(--surface); padding: 2px 8px; border-radius: 2px; }
+.links { display: flex; gap: 16px; margin-top: 12px; font-size: 14px; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+.skills h3 { font-size: 1rem; margin-bottom: 8px; }
+.skills ul { margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 15px; display: flex; flex-direction: column; gap: 2px; }
+
+.timeline { display: flex; flex-direction: column; gap: 20px; }
+.entry { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 20px; }
+.entry .when { font-family: var(--font-mono); font-size: 13px; color: var(--muted); padding-top: 3px; }
+.entry h3 { font-size: 1.1rem; font-weight: 700; }
+.entry p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+
+.note {
+  font-family: var(--font-mono); font-size: 12px; color: var(--muted);
+  border: 1px dashed var(--rule); padding: 10px 12px; background: var(--surface); max-width: 65ch;
+}
+footer { font-family: var(--font-mono); font-size: 12px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
+
+@media (max-width: 820px) {
+  body { padding-block: 32px 48px; }
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .side { position: static; }
+  .nav { flex-direction: row; flex-wrap: wrap; gap: 6px 18px; }
+}
+@media (max-width: 480px) {
+  .project, .entry { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  a, .copy { transition: color .15s, opacity .15s; }
+  .copy:hover { opacity: .85; }
+}
+</style>
+
+<div class="wrap">
+  <aside class="side">
+    <header>
+      <div class="eyebrow">Portfolio</div>
+      <h1 class="name" id="name">PIYUSH</h1>
+      <p class="role" id="role">Aspiring Entrepreneur</p>
+    </header>
+
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#background">Education &amp; experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="contact" id="contact">
+      <div class="row">
+        <span class="label">Email</span>
+        <span id="email">kumarpiyushkumar4930@gmail.com</span>
+        <button class="copy" id="copy-email" type="button">Copy</button>
+      </div>
+      <div class="row">
+        <span class="label">LinkedIn</span>
+        <a href="https://www.linkedin.com/" rel="noopener">www.linkedin.com/in/piyushkumartiwari</a>
+      </div>
+     <div class="row github-row">
+     <span class="label">GitHub</span>
+     <a href="https://github.com/piyusht01" target="_blank" rel="noopener">https://github.com/piyusht01</a>
+</div>
+    </div>
+  </aside>
+
+  <main>
+    <section id="about">
+      <h2>About</h2>
+      <p class="lede">I'm Piyush Kumar Tiwari, a first-year B.Tech student specializing in Computer Science and Engineering (Artificial Intelligence) at Vedam School of Technology.</p>
+      <p>I'm an aspiring entrepreneur with a strong interest in technology, programming, and web development. I enjoy learning new skills, exploring creative ideas, and turning them into practical projects. Currently, I'm building my foundation in Java, HTML, CSS, and JavaScript while improving my problem-solving and development skills. I believe in learning by building, thinking like an entrepreneur, and creating with purpose. My goal is to grow into a developer and entrepreneur who transforms ideas into impactful solutions. I don't just want to follow technology; I want to use it to create what's next.</p>
+      <div class="note">Think big. Build smart. Create impact.</div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+        <article class="project">
+          <div class="when">2026</div>
+          <div>
+            <h3>Gym-Website</h3>
+            <p>A modern fitness platform designed to bring the gym experience online through an engaging, user-friendly, and visually appealing interface. The goal of this project was to create a digital space where fitness enthusiasts can explore workout programs, discover gym services, learn about membership plans, and take the first step towards their fitness journey.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li></ul>
+            <div class="links"><a href="https://github.com/" rel="noopener">Source code</a></div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="when">2026</div>
+          <div>
+            <h3>SNAKE-GAME</h3>
+            <p>Snake Game is a modern take on one of the most iconic arcade games, bringing a timeless gaming experience to life through interactive gameplay and programming logic. Players navigate a growing snake across the game board, collect food to increase their score, and carefully avoid collisions to keep the game going.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JAVASCRIPT</li></ul>
+            <div class="links"><a href="https://github.com/" rel="noopener">Source code</a></div>
+          </div>
+        </article>
+        <article class="project">
+          <div class="when">2026</div>
+          <div>
+            <h3>LAN-QUIZ SYSTEM</h3>
+            <p>Developed an Offline Quiz System that allows users to take quizzes without requiring an internet connection. The system is designed to provide a simple, fast, and reliable quiz experience.The main goal of this project was to create a quiz application that can work without an internet connection, allowing users to answer questions, calculate scores, and view their results locally.</p>
+            <ul class="tags"><li>Web Development</li><li>Teamwork</li></ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skills">
+        <div><h3>Languages</h3><ul><li>Java</li><li>JavaScript</li>HTML<li>CSS</li></ul></div>
+        <div><h3>Working style</h3><ul><li>Initiative & Ownership</li><li>Team projects</li><li>Continuous Learning</li></ul></div>
+        <div><h3>Tools</h3><ul><li>Git and GitHub</li><li>VS Code</li></ul></div>
+      </div>
+    </section>
+
+    <section id="background">
+      <h2>Achievements & Activities</h2>
+      <div class="timeline">
+        <div class="entry">
+          <div class="when">CLUBS</div>
+          <div><h3>Vedam School of Technology</h3><p>Open Source | Enterpreneurship | Sports</p></div>
+        </div>
+        <div class="entry">
+          <div class="when">Achievements</div>
+          <div><h3>Extracurricular</h3><p>Silver medal for martial arts [State Level]</p><p>Bronze medal for martial arts [State level]</p><p>Cricket | Football | Basketball | Athletics</p></div>
+        </div>
+      </div>
+    </section>
+
+    <footer><span>Build using HTML and CSS</span></footer>
+  </main>
+</div>
+
+<script>
+(function () {
+  var y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+  var btn = document.getElementById("copy-email");
+  var email = document.getElementById("email");
+  if (!btn || !email) return;
+  btn.addEventListener("click", function () {
+    var text = email.textContent.trim();
+    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy"; }, 1500); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(email);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = "Selected"; setTimeout(function () { btn.textContent = "Copy"; }, 1500);
+    };
+    try {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+
+</body></html>
